@@ -1,19 +1,22 @@
 import { useState } from 'react';
-import { getWeatherData } from './api/weatherData';
+import { getWeatherData, get5DaysWeatherForecastData } from './api/weatherData';
 import './styles/App.css';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import { TextField, Button, Typography } from '@mui/material';
+import { TextField, Button, Typography, Link } from '@mui/material';
 
 function App() {
   const [city, setCity] = useState('');
-  const [weatherData, setWeatherData] = useState(null);
+  const [cityForForecast, setCityForForecast] = useState('');
+  const [actualWeatherData, setActualWeatherData] = useState(null);
+  const [weatherForecastData, setWeatherForecastData] = useState({});
   const [error, setError] = useState('');
 
   const handleSearchButtonClick = (e) => {
     e.preventDefault();
+    setActualWeatherData(null);
 
     if (!city) {
       setError('Please enter a city');
@@ -21,11 +24,19 @@ function App() {
     }
 
     getWeatherData(city).then((res) => {
-      console.log(res);
-
-      setWeatherData(res.data);
-      console.log('🚀 ~ getWeatherData ~ res.data:', res.data);
+      setActualWeatherData(res.data);
       setError('');
+    });
+
+    setCityForForecast(city);
+  };
+
+  const handle5DayForecastLinkClick = (e) => {
+    e.preventDefault();
+
+    get5DaysWeatherForecastData(cityForForecast).then((res) => {
+
+      setWeatherForecastData(res.data);
     });
   };
 
@@ -37,24 +48,35 @@ function App() {
         value={city}
         onChange={(e) => setCity(e.target.value)}
         variant="outlined"
+        // error={error}
+        // helperText={error}
       />
-      <Button
-        onClick={handleSearchButtonClick}
-        variant="contained"
-      >
+      <Button sx={{marginLeft: '10px'}} onClick={handleSearchButtonClick} variant="contained">
         Get Weather
       </Button>
 
       {error && <Typography color="error">{error}</Typography>}
 
-      {weatherData && (
-        <div>
-          <Typography variant="h5">{weatherData.name}</Typography>
-          <Typography>{weatherData.weather[0].description}</Typography>
-          <Typography>Temperature: {weatherData.main.temp}</Typography>
-          <Typography>Wind Speed: {weatherData.wind.speed}</Typography>
-          <Typography>Humidity: {weatherData.main.humidity}</Typography>
-        </div>
+      {actualWeatherData && (
+        <>
+          <div>
+            <Typography variant="h5">{actualWeatherData.name}</Typography>
+            <Typography>{actualWeatherData.weather[0].description}</Typography>
+            <Typography>Temperature: {actualWeatherData.main.temp}</Typography>
+            <Typography>Wind Speed: {actualWeatherData.wind.speed}</Typography>
+            <Typography>Humidity: {actualWeatherData.main.humidity}</Typography>
+          </div>
+          <div>
+            <Link
+              underline="none"
+              variant="body2"
+              onClick={handle5DayForecastLinkClick}
+              sx={{ cursor: 'pointer' }}
+            >
+              Show 5 day weather forecast
+            </Link>
+          </div>
+        </>
       )}
     </div>
   );

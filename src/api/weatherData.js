@@ -1,17 +1,35 @@
 import axios from 'axios';
 
-const baseUrl = 'https://api.openweathermap.org/data/2.5/weather?q='
-const API_KEY = 'b797f76a31b14512594467257d50db94';
+const weatherApiKey = import.meta.env.VITE_REACT_APP_WEATHER_API_KEY;
 
 export const getWeatherData = async (city) => {
   try {
     const response = await axios.get(
-      baseUrl + city, {
+      'https://api.openweathermap.org/data/2.5/weather?q=' + city,
+      {
         params: {
           units: 'metric',
-          appid: API_KEY
-        }
-      }
+          appid: weatherApiKey,
+        },
+      },
+    );
+
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const get5DaysWeatherForecastData = async (city) => {
+  try {
+    const response = await axios.get(
+      'https://api.openweathermap.org/data/2.5/forecast?q=' + city,
+      {
+        params: {
+          units: 'metric',
+          appid: weatherApiKey,
+        },
+      },
     );
 
     return response;
