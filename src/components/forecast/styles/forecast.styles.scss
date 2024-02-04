@@ -1,0 +1,12 @@
+.title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .mobile-text {
+    font-size: 0.6rem !important;
+    padding: 2px !important;
+  }
+}
