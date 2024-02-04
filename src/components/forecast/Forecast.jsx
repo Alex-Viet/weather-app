@@ -9,6 +9,7 @@ import {
   TableCell,
   TableBody,
   useMediaQuery,
+  Container,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { formatDate } from '../../utils/getDate';
@@ -42,17 +43,21 @@ export const ForecastPopup = ({
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
-                  <TableCell className="mobile-text">Date</TableCell>
-                  <TableCell className="mobile-text">
+                  <TableCell className="mobile-text" align="center">
+                    Date
+                  </TableCell>
+                  <TableCell className="mobile-text" align="center">
                     {isMobile ? 'Temp' : 'Temperature'} (&#8451;)
                   </TableCell>
-                  <TableCell className="mobile-text">
+                  <TableCell className="mobile-text" align="center">
                     {isMobile ? 'Wind (m/s)' : 'Wind speed (m/sec)'}
                   </TableCell>
-                  <TableCell className="mobile-text">
+                  <TableCell className="mobile-text" align="center">
                     {isMobile ? 'Hum' : 'Humidity'} (%)
                   </TableCell>
-                  <TableCell className="mobile-text">Weather</TableCell>
+                  <TableCell className="mobile-text" align="center">
+                    Weather
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -70,8 +75,25 @@ export const ForecastPopup = ({
                     <TableCell className="mobile-text" align="center">
                       {item.main.humidity}
                     </TableCell>
-                    <TableCell className="mobile-text">
-                      {item.weather[0].description}
+                    <TableCell
+                      className="mobile-text"
+                      align="center"
+                      sx={{ lineHeight: '1' }}
+                    >
+                      <Container
+                        sx={{
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                        }}
+                      >
+                        {item.weather[0].description}
+                        <img
+                          className="icon"
+                          src={`https://openweathermap.org/img/wn/${item.weather[0]?.icon}@2x.png`}
+                          alt=""
+                        />
+                      </Container>
                     </TableCell>
                   </TableRow>
                 ))}
