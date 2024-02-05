@@ -1,4 +1,4 @@
-# Weather forecast widget in React + Vite
+# Weather forecast app in React + Vite
 The application is developed to view the weather. You need to enter a city, then the temperature, wind speed, humidity, and weather conditions icon are displayed. When you click the link, a window opens with a 5-day forecast, with the ability to view the forecast for the next 5 days in 3-hour increments.
 
 Project deployment: [Weather app](https://ephemeral-cascaron-0cc54f.netlify.app)
