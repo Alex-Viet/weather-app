@@ -1,38 +1,37 @@
-# Мини-приложение для просмотра прогноза погоды на React + Vite
-Приложение разработано для просмотра погоды. Необохимо ввести город, далее отображаются температура, скорость ветра, влажность, иконка погодных условий.
-При нажатии ссылки, открывается окно с прогнозом на 5 дней, возможностью посмотреть прогноз на ближайшие 5 дней с шагом в 3 часа.
+# Weather forecast widget in React + Vite
+The application is developed to view the weather. You need to enter a city, then the temperature, wind speed, humidity, and weather conditions icon are displayed. When you click the link, a window opens with a 5-day forecast, with the ability to view the forecast for the next 5 days in 3-hour increments.
 
-Деплой проекта: [Weather app](https://ephemeral-cascaron-0cc54f.netlify.app)
+Project deployment: [Weather app](https://ephemeral-cascaron-0cc54f.netlify.app)
 
-В приложении использована переменная окружения VITE_REACT_APP_WEATHER_API_KEY, куда необходимо поместить api-ключ. Чтобы его получить, нужно сначала зарегистрироваться на сайте https://openweathermap.org/, далее получить ключ.
+The application uses the environment variable VITE_REACT_APP_WEATHER_API_KEY, where you need to place the api key. To get it, you must first register on the website https://openweathermap.org/, then get a key.
 
-Для клонирования репозитория выполните команду:
+To clone the repository, run the command:
 `git clone https://github.com/Alex-Viet/weather-app`
 
-Для установки зависимостей:
+To install dependencies:
 `npm install`
 
-Для запуска проекта в режиме разработчика:
+To run the project in developer mode:
 `npm run dev`<br>
-Проект будет доступен локально по адресу: http://localhost:5173
+The project will be available locally at: http://localhost:5173
 
-Для запуска проекта в режиме пре-деплоя:
+To run the project in pre-deployment mode:
 `npm run preview`<br>
-Проект будет доступен локально по адресу: http://localhost:4173
+The project will be available locally at: http://localhost:4173
 
-## Язык и технологии:
-- Язык программирования: JavaScript
+## Language and technologies:
+- Programming language: JavaScript
 - Vite
 - React
 - Sass
 - Eslint
 - Prettier
 
-### Сторонние библиотеки:
+### Third party libraries:
 - axios, material UI
 
-## Назначение папок проекта:
-/components - переиспользуемые react-компоненты,<br>
-/api - api-запросы,<br>
-/styles - стили,<br>
-/utils - вспомогательные функции<br>
+## Purpose of project folders:
+/components - reused react components,<br>
+/api - api requests,<br>
+/styles - styles,<br>
+/utils - auxiliary functions
