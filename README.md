@@ -1,8 +1,38 @@
-# React + Vite
+# Мини-приложение для просмотра прогноза погоды на React + Vite
+Приложение разработано для просмотра погоды. Необохимо ввести город, далее отображаются температура, скорость ветра, влажность, иконка погодных условий.
+При нажатии ссылки, открывается окно с прогнозом на 5 дней, возможностью посмотреть прогноз на ближайшие 5 дней с шагом в 3 часа.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Деплой проекта: [Weather app](https://ephemeral-cascaron-0cc54f.netlify.app)
 
-Currently, two official plugins are available:
+В приложении использована переменная окружения VITE_REACT_APP_WEATHER_API_KEY, куда необходимо поместить api-ключ. Чтобы его получить, нужно сначала зарегистрироваться на сайте https://openweathermap.org/, далее получить ключ.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Для клонирования репозитория выполните команду:
+`git clone https://github.com/Alex-Viet/weather-app`
+
+Для установки зависимостей:
+`npm install`
+
+Для запуска проекта в режиме разработчика:
+`npm run dev`<br>
+Проект будет доступен локально по адресу: http://localhost:5173
+
+Для запуска проекта в режиме пре-деплоя:
+`npm run preview`<br>
+Проект будет доступен локально по адресу: http://localhost:4173
+
+## Язык и технологии:
+- Язык программирования: JavaScript
+- Vite
+- React
+- Sass
+- Eslint
+- Prettier
+
+### Сторонние библиотеки:
+- axios, material UI
+
+## Назначение папок проекта:
+/components - переиспользуемые react-компоненты,<br>
+/api - api-запросы,<br>
+/styles - стили,<br>
+/utils - вспомогательные функции<br>
