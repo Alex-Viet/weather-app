@@ -10,10 +10,14 @@ import {
   TableBody,
   useMediaQuery,
   Container,
+  Skeleton,
+  Link,
+  Box,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { formatDate } from '../../utils/getDate';
 import './styles/forecast.styles.css';
+import { useState } from 'react';
 
 export const ForecastPopup = ({
   weatherData,
@@ -21,7 +25,15 @@ export const ForecastPopup = ({
   isOpen,
   isLoading,
 }) => {
+  const [isDetailedForecast, setIsDetailedForecast] = useState(false);
   const isMobile = useMediaQuery('(max-width:600px)');
+
+  const filteredData = weatherData?.list?.filter((item) => {
+    const date = new Date(item.dt_txt);
+    const hours = date.getHours();
+
+    return hours === 12;
+  });
 
   return (
     <div>
@@ -61,19 +73,19 @@ export const ForecastPopup = ({
                 </TableRow>
               </TableHead>
               <TableBody>
-                {weatherData?.list?.map((item) => (
-                  <TableRow key={item.dt_txt}>
+                {isLoading ? (
+                  <TableRow>
                     <TableCell className="mobile-text">
-                      {formatDate(item.dt_txt)}
+                      <Skeleton width={60} />
                     </TableCell>
                     <TableCell className="mobile-text" align="center">
-                      {Math.round(item.main.temp)}
+                      <Skeleton width={20} />
                     </TableCell>
                     <TableCell className="mobile-text" align="center">
-                      {Math.round(item.wind.speed)}
+                      <Skeleton width={20} />
                     </TableCell>
                     <TableCell className="mobile-text" align="center">
-                      {item.main.humidity}
+                      <Skeleton width={20} />
                     </TableCell>
                     <TableCell
                       className="mobile-text"
@@ -87,19 +99,101 @@ export const ForecastPopup = ({
                           alignItems: 'center',
                         }}
                       >
-                        {item.weather[0].description}
-                        <img
-                          className="icon"
-                          src={`https://openweathermap.org/img/wn/${item.weather[0]?.icon}@2x.png`}
-                          alt=""
-                        />
+                        <Skeleton width={20} />
+                        <Skeleton variant="circular" width={20} height={20} />
                       </Container>
                     </TableCell>
                   </TableRow>
-                ))}
+                ) : isDetailedForecast ? (
+                  weatherData?.list?.map((item) => (
+                    <TableRow key={item.dt_txt}>
+                      <TableCell className="mobile-text">
+                        {formatDate(item.dt_txt)}
+                      </TableCell>
+                      <TableCell className="mobile-text" align="center">
+                        {Math.round(item.main.temp)}
+                      </TableCell>
+                      <TableCell className="mobile-text" align="center">
+                        {Math.round(item.wind.speed)}
+                      </TableCell>
+                      <TableCell className="mobile-text" align="center">
+                        {item.main.humidity}
+                      </TableCell>
+                      <TableCell
+                        className="mobile-text"
+                        align="center"
+                        sx={{ lineHeight: '1' }}
+                      >
+                        <Container
+                          sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                          }}
+                        >
+                          {item.weather[0].description}
+                          <img
+                            className="icon"
+                            src={`https://openweathermap.org/img/wn/${item.weather[0]?.icon}@2x.png`}
+                            alt=""
+                          />
+                        </Container>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                ) : (
+                  filteredData?.map((item) => (
+                    <TableRow key={item.dt_txt}>
+                      <TableCell className="mobile-text">
+                        {formatDate(item.dt_txt)}
+                      </TableCell>
+                      <TableCell className="mobile-text" align="center">
+                        {Math.round(item.main.temp)}
+                      </TableCell>
+                      <TableCell className="mobile-text" align="center">
+                        {Math.round(item.wind.speed)}
+                      </TableCell>
+                      <TableCell className="mobile-text" align="center">
+                        {item.main.humidity}
+                      </TableCell>
+                      <TableCell
+                        className="mobile-text"
+                        align="center"
+                        sx={{ lineHeight: '1' }}
+                      >
+                        <Container
+                          sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                          }}
+                        >
+                          {item.weather[0].description}
+                          <img
+                            className="icon"
+                            src={`https://openweathermap.org/img/wn/${item.weather[0]?.icon}@2x.png`}
+                            alt=""
+                          />
+                        </Container>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                )}
               </TableBody>
             </Table>
           </TableContainer>
+          {!isDetailedForecast && (
+            <Box sx={{ margin: '10px 0 0 10px' }}>
+              <Link
+                underline="none"
+                variant="body2"
+                onClick={() => setIsDetailedForecast(true)}
+                sx={{ cursor: 'pointer' }}
+              >
+                Detailed weather forecast data with 3-hour step
+              </Link>
+            </Box>
+          )}
         </DialogContent>
       </Dialog>
     </div>

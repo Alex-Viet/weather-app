@@ -16,7 +16,7 @@ export const getWeatherData = async (city) => {
 
     return response;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 };
 
@@ -34,6 +34,6 @@ export const get5DaysWeatherForecastData = async (city) => {
 
     return response;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 };
