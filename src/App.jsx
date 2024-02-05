@@ -50,6 +50,7 @@ function App() {
       const errorText = errorsHandler(res);
       if (errorText) {
         setError(errorText);
+        setIsLoading(false);
         return;
       }
 
